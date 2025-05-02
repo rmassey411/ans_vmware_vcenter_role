@@ -1,0 +1,8 @@
+---
+# defaults file for ans_vcenter_misc_role
+vcenter_hostname: "your_vcenter_hostname"
+vcenter_username: "your_vcenter_username"
+vcenter_password: "your_vcenter_password"
+vcenter_datacenter: "your_vcenter_datacenter"
+
+dvportgroup_name: "your_dvportgroup_name"

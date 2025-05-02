@@ -1,0 +1,20 @@
+---
+- name: Gather information about dvPortGroups
+  community.vmware.vmware_dvs_portgroup_info:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_userpass }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    validate_certs: no
+  delegate_to: localhost
+  register: dvportgroup_info
+
+- name: Find the dvPortGroup ID by name
+  set_fact:
+    dvportgroup_id: "{{ item.key }}"
+  loop: "{{ dvportgroup_info.dvs_portgroup_info.DSwitch }}"
+  when: item.portgroup_name == dvportgroup_name
+
+- name: Print the dvPortGroup ID
+  ansible.builtin.debug:
+    msg: "The dvPortGroup ID for '{{ dvportgroup_name }}' is '{{ dvportgroup_id }}'"
